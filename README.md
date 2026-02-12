@@ -1,20 +1,65 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# BuildPCBs Explorer
 
-# Run and deploy your AI Studio app
+An AI-powered explorer for accessing and interacting with PCB designs, built with Next.js 16 and Tailwind CSS v4.
 
-This contains everything you need to run your app locally.
+## 🚀 Tech Stack
 
-View your app in AI Studio: https://ai.studio/apps/drive/1RCOQ62mSBGf7kSYpQMKKaWS84v3MSxlo
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **AI**: Google Gemini API
+- **Directives**: `robots.txt` & `ai.txt` for AI bot control
 
-## Run Locally
+## 🛠️ Getting Started
 
-**Prerequisites:**  Node.js
+### Prerequisites
 
+- Node.js 18+
+- pnpm (recommended) or npm
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### Installation
+
+```bash
+pnpm install
+```
+
+### Development
+
+Start the development server:
+
+```bash
+pnpm dev
+# or
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 📦 Deployment
+
+This project is configured for **Cloudflare Pages** using `@cloudflare/next-on-pages`.
+
+### Build Command
+
+```bash
+pnpm pages:build
+```
+
+### Output Directory
+
+```
+.vercel/output/static
+```
+
+### Cloudflare Configuration
+
+Ensure the **Compatibility Flags** in your Cloudflare Pages project settings include:
+
+- `nodejs_compat`
+
+## 📂 Project Structure
+
+- `src/app`: App Router pages and layouts.
+- `src/components`: Reusable UI components.
+- `src/services`: API services (Gemini, etc.).
+- `public`: Static assets, `robots.txt`, and `ai.txt`.
