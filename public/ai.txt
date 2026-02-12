@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# AI Bots - Explicitly Allowed/Blocked
+User-agent: GPTBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://buildpcbs.com/sitemap.xml
