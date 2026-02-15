@@ -13,11 +13,11 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
   const fullText = "imagine a github for hardware";
 
   useEffect(() => {
-    // Phase 1: I-Beam for 2.8 seconds with slower beeps
+    // Phase 1: High-intensity I-Beam inversion point for ~2.8 seconds
     const beepInterval = setInterval(() => {
       setBeeping(true);
-      setTimeout(() => setBeeping(false), 300);
-    }, 800);
+      setTimeout(() => setBeeping(false), 450);
+    }, 900);
 
     const timer = setTimeout(() => {
       clearInterval(beepInterval);
@@ -38,9 +38,9 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
         currentIdx++;
         if (currentIdx === fullText.length) {
           clearInterval(typeInterval);
-          setTimeout(() => setPhase('DISSOLVE'), 1200);
+          setTimeout(() => setPhase('DISSOLVE'), 1800);
         }
-      }, 80);
+      }, 95);
       return () => clearInterval(typeInterval);
     }
   }, [phase]);
@@ -56,7 +56,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
       
       ctx.fillStyle = 'white';
       ctx.font = '300 32px "JetBrains Mono", monospace';
-      if (window.innerWidth > 768) ctx.font = '300 48px "JetBrains Mono", monospace';
+      if (window.innerWidth > 768) ctx.font = '300 52px "JetBrains Mono", monospace';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(fullText, width / 2, height / 2);
@@ -65,21 +65,20 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
       const pixels = imageData.data;
       const particles: any[] = [];
 
-      // Extreme density sampling
+      // Extreme density for a premium dust dissolution feel
       for (let y = 0; y < height; y += 1) {
         for (let x = 0; x < width; x += 1) {
           const alpha = pixels[(y * width + x) * 4 + 3];
-          if (alpha > 140) {
-            // High probability of particle creation for maximum volume
-            if (Math.random() > 0.1) { 
+          if (alpha > 120) {
+            if (Math.random() > 0.04) { 
               particles.push({
                 x,
                 y,
                 vx: (Math.random() - 0.5) * 1.5,
-                vy: (Math.random() - 0.5) * 1.2 - Math.random() * 0.6,
+                vy: (Math.random() - 0.5) * 1.2 - Math.random() * 0.5,
                 life: 1.0,
-                decay: 0.002 + Math.random() * 0.003, // Slower decay for more gradual effect
-                size: 0.6 + Math.random() * 1.4
+                decay: 0.001 + Math.random() * 0.0015,
+                size: 0.5 + Math.random() * 1.5
               });
             }
           }
@@ -96,7 +95,7 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
             alive = true;
             p.x += p.vx;
             p.y += p.vy;
-            p.vy += 0.004; // low gravity
+            p.vy += 0.002; 
             p.life -= p.decay;
             
             ctx.fillStyle = `rgba(255, 255, 255, ${p.life})`;
@@ -120,18 +119,18 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
       {phase === 'IBEAM' && (
-        <div className={`w-[4px] h-32 bg-blue-300 shadow-[0_0_40px_rgba(147,197,253,1)] cursor-blink ${beeping ? 'beep-active' : ''}`} />
+        <div className={`w-[6px] h-40 bg-white shadow-[0_0_80px_rgba(255,255,255,1),0_0_20px_white] transition-opacity duration-300 ${beeping ? 'opacity-100' : 'opacity-40'}`} />
       )}
       
       {phase === 'TYPEWRITER' && (
-        <div className="flex items-center space-x-3">
-          <h1 className="text-2xl md:text-5xl mono font-light tracking-tighter text-white">
+        <div className="flex items-center space-x-4 px-10">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl mono font-light tracking-tighter text-white">
             {text.split(' github for hardware')[0]}
             {text.includes(' github for hardware') && (
-              <span className="text-gray-500"> github for hardware</span>
+              <span className="text-zinc-600"> github for hardware</span>
             )}
           </h1>
-          <div className="w-[4px] h-20 bg-blue-300 shadow-[0_0_20px_rgba(147,197,253,0.8)] cursor-blink" />
+          <div className="w-[6px] h-24 bg-white shadow-[0_0_40px_rgba(255,255,255,0.8)] cursor-blink" />
         </div>
       )}
 

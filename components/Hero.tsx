@@ -1,36 +1,87 @@
 
 import React, { useEffect, useState } from 'react';
 
-const RollingWord = ({ word, imageUrl, delay }: { word: string; imageUrl: string; delay: number }) => {
-  const [active, setActive] = useState(false);
+const words = ['build', 'fork', 'share'];
+
+const OdometerLoop = () => {
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setTimeout(() => setActive(true), delay);
-    return () => clearTimeout(timer);
-  }, [delay]);
+    // Sequence: 2.5 seconds per word
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % words.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <span className="inline-block overflow-hidden align-bottom h-[1.15em] leading-[1.15] relative translate-y-[0.1em]">
+    <span className="inline-block overflow-hidden align-bottom h-[1.2em] leading-[1.2] relative translate-y-[0.15em]">
       <span
-        className={`inline-block transition-transform duration-[1200ms] cubic-bezier(0.16, 1, 0.3, 1) flex flex-col ${
-          active ? '-translate-y-2/3' : 'translate-y-0'
-        }`}
+        className="inline-block transition-transform duration-[700ms] flex flex-col items-start"
+        style={{ 
+          transform: `translateY(-${index * 1.2}em)`,
+          transitionTimingFunction: 'cubic-bezier(0.65, 0, 0.35, 1)' 
+        }}
       >
-        {/* State 1: Hidden/Empty */}
-        <span className="block h-[1.15em] text-transparent select-none opacity-0">.</span>
-        {/* State 2: Mid-roll blur or placeholder */}
-        <span className="block h-[1.15em] font-sans font-black uppercase italic tracking-tighter text-white/10 blur-sm">
-          {word}
+        {words.map((w, i) => (
+          <span
+            key={i}
+            className="block h-[1.2em] serif italic text-white whitespace-nowrap"
+          >
+            {w}
+          </span>
+        ))}
+        {/* Clone the first word at the end for smooth looping if needed, 
+            but for 3 words a standard index shift is fine for most cases. 
+            Added a 4th clone for seamless visual return from 'share' back to 'build' */}
+        <span className="block h-[1.2em] serif italic text-white whitespace-nowrap">
+          {words[0]}
         </span>
-        {/* State 3: Final Masked Word */}
-        <span
-          className="block h-[1.15em] font-sans font-black uppercase italic tracking-tighter bg-clip-text text-transparent bg-cover bg-center animate-pulse"
-          style={{ 
-            backgroundImage: `url('${imageUrl}')`,
-            textShadow: '0 0 30px rgba(0, 56, 223, 0.2)'
-          }}
-        >
-          {word}
+      </span>
+    </span>
+  );
+};
+
+// Adjusted OdometerLoop for seamless wrap-around
+const SeamlessOdometer = () => {
+  const [index, setIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => prev + 1);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (index === words.length) {
+      const timer = setTimeout(() => {
+        setIsTransitioning(false);
+        setIndex(0);
+      }, 700); // match transition duration
+      return () => clearTimeout(timer);
+    } else if (index === 0) {
+      setIsTransitioning(true);
+    }
+  }, [index]);
+
+  return (
+    <span className="inline-block overflow-hidden align-bottom h-[1.2em] leading-[1.2] relative translate-y-[0.15em] px-1">
+      <span
+        className="inline-block flex flex-col items-start"
+        style={{ 
+          transform: `translateY(-${index * 1.2}em)`,
+          transition: isTransitioning ? 'transform 700ms cubic-bezier(0.65, 0, 0.35, 1)' : 'none'
+        }}
+      >
+        {words.map((w, i) => (
+          <span key={i} className="block h-[1.2em] serif italic text-white">
+            {w}
+          </span>
+        ))}
+        <span className="block h-[1.2em] serif italic text-white">
+          {words[0]}
         </span>
       </span>
     </span>
@@ -42,25 +93,8 @@ const Hero: React.FC = () => {
     <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 lg:py-28 text-center flex flex-col items-center">
       <div className="max-w-4xl">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight mb-8 leading-[1.2] serif text-white">
-          <RollingWord 
-            word="Build" 
-            imageUrl="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop" 
-            delay={400} 
-          />
-          <span className="serif text-white/80">, </span>
-          <RollingWord 
-            word="fork" 
-            imageUrl="https://images.unsplash.com/photo-1635332392051-4091c53f86f7?q=80&w=1000&auto=format&fit=crop" 
-            delay={700} 
-          />
-          <span className="serif text-white/80"> and </span>
-          <RollingWord 
-            word="share" 
-            imageUrl="https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=1000&auto=format&fit=crop" 
-            delay={1000} 
-          />
-          <br className="hidden sm:block" />
-          <span className="serif text-white">PCB projects in the cloud</span>
+          <SeamlessOdometer />
+          <span className="serif text-white whitespace-nowrap"> PCB projects in the cloud</span>
         </h1>
         
         <p className="text-base md:text-lg text-zinc-400 mb-12 leading-relaxed max-w-2xl mx-auto font-sans font-medium lowercase tracking-tight">
@@ -68,11 +102,11 @@ const Hero: React.FC = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-          <button className="group relative bg-[#0038df] hover:bg-blue-700 text-white px-10 h-[60px] rounded-full font-bold text-lg transition-all shadow-2xl shadow-blue-900/40 flex items-center justify-center overflow-hidden">
+          <button className="group relative bg-[#0038df] hover:bg-blue-700 text-white px-8 h-[60px] min-w-[200px] rounded-full font-bold text-base transition-all shadow-xl shadow-blue-900/40 flex items-center justify-center overflow-hidden active:scale-95">
             <span className="relative z-10 uppercase tracking-widest text-sm">Start Building</span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             <svg className="ml-3 w-5 h-5 transform group-hover:translate-x-1 transition-transform relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </button>
         </div>
