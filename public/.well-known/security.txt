@@ -1,0 +1,10 @@
+# BuildPCBs.com Security Policy
+# Contact information for security researchers
+
+Contact: mailto:contact@buildpcbs.com
+Contact: https://buildpcbs.com/security
+Encryption: https://buildpcbs.com/security/pgp-key.txt
+Preferred-Languages: en
+Canonical: https://buildpcbs.com/.well-known/security.txt
+Policy: https://buildpcbs.com/security-policy
+Hiring: https://buildpcbs.com/careers

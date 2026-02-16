@@ -1,65 +1,36 @@
-# BuildPCBs Explorer
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-An AI-powered explorer for accessing and interacting with PCB designs, built with Next.js 16 and Tailwind CSS v4.
+## Getting Started
 
-## 🚀 Tech Stack
-
-- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **AI**: Google Gemini API
-- **Directives**: `robots.txt` & `ai.txt` for AI bot control
-
-## 🛠️ Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- pnpm (recommended) or npm
-
-### Installation
+First, run the development server:
 
 ```bash
-pnpm install
-```
-
-### Development
-
-Start the development server:
-
-```bash
+npm run dev
+# or
+yarn dev
+# or
 pnpm dev
 # or
-npm run dev
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 📦 Deployment
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project is configured for **Cloudflare Pages** using `@cloudflare/next-on-pages`.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-### Build Command
+## Learn More
 
-```bash
-pnpm pages:build
-```
+To learn more about Next.js, take a look at the following resources:
 
-### Output Directory
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-```
-.vercel/output/static
-```
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Cloudflare Configuration
+## Deploy on Vercel
 
-Ensure the **Compatibility Flags** in your Cloudflare Pages project settings include:
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- `nodejs_compat`
-
-## 📂 Project Structure
-
-- `src/app`: App Router pages and layouts.
-- `src/components`: Reusable UI components.
-- `src/services`: API services (Gemini, etc.).
-- `public`: Static assets, `robots.txt`, and `ai.txt`.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

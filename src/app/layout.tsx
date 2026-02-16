@@ -1,23 +1,54 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, DM_Mono } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { WaitlistProvider } from "@/context/WaitlistContext";
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "500", "700"],
+  variable: "--font-sans",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const dmMono = DM_Mono({
   subsets: ["latin"],
-  display: "swap",
+  weight: "400",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
-  title: "BuildPCBs Explorer",
-  description: "Hardware as Code. Decentralized manufacturing network.",
+  metadataBase: new URL("https://buildpcbs.com"),
+  title: "BuildPCBs | The AI + Web3 Hardware Network",
+  description:
+    "Think it. Chat it. Build it. Sell it. The first decentralized manufacturing network where AI turns text into physical products.",
+  openGraph: {
+    images: [
+      {
+        url: "/og-image.png?v=2",
+        width: 1200,
+        height: 630,
+        alt: "BuildPCBs - The AI + Web3 Hardware Network",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.png?v=3"],
+  },
+  alternates: {
+    canonical: "https://buildpcbs.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  other: {
+    "google-site-verification": "your-google-verification-code",
+  },
 };
 
 export default function RootLayout({
@@ -26,49 +57,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-pcb-dark font-sans flex flex-col relative overflow-x-hidden`}
+        className={`${dmSans.variable} ${dmMono.variable} ${GeistSans.variable} ${GeistMono.variable} font-sans antialiased`}
       >
-        {/* Tech Background */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-tech-grid bg-[length:40px_40px] opacity-20"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-pcb-dark opacity-90"></div>
-        </div>
-
-        <div className="relative z-10 flex flex-col min-h-screen">
-          <Navbar />
-
-          <main className="flex-grow">{children}</main>
-
-          <footer className="border-t border-pcb-border py-8 bg-pcb-panel/50 backdrop-blur-sm mt-20">
-            <div className="container mx-auto px-4 text-center">
-              <p className="text-zinc-600 text-xs font-mono tracking-wider">
-                BUILD_PCBS_NETWORK_V1.0 // SECURED_BY_SILICON_SEAL
-              </p>
-              <div className="flex justify-center gap-6 mt-4 text-xs text-zinc-500 font-mono">
-                <a
-                  href="#"
-                  className="hover:text-pcb-primary-light transition-colors"
-                >
-                  [PRIVACY]
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-pcb-primary-light transition-colors"
-                >
-                  [TERMS]
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-pcb-primary-light transition-colors"
-                >
-                  [CONTRACTS]
-                </a>
-              </div>
-            </div>
-          </footer>
-        </div>
+        <ThemeProvider>
+          <WaitlistProvider>
+            <Navbar />
+            <main className="pt-32 md:pt-0">{children}</main>
+            <Footer />
+          </WaitlistProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

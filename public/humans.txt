@@ -1,0 +1,17 @@
+/* TEAM */
+Developer: Abdul Rohim
+Contact: hello@buildpcbs.com
+Location: Global
+
+/* SITE */
+Last update: 2025/10/13
+Language: English
+Doctype: HTML5
+IDE: VS Code, Cursor
+
+/* THANKS */
+Thanks to: Next.js, React, Tailwind CSS, Vercel
+Inspired by: Modern web development practices
+
+/* NOTE */
+This site is built with modern web technologies and follows accessibility guidelines.

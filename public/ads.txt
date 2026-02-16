@@ -1,0 +1,4 @@
+# BuildPCBs.com Advertising Transparency
+# We do not currently run any advertising on this site
+
+# If we add advertising in the future, this file will be updated with relevant information
