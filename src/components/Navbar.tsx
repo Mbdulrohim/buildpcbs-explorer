@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative w-8 h-8 flex items-center justify-center bg-pcb-primary/10 rounded border border-pcb-primary/20 group-hover:border-pcb-primary/50 transition-all">
-            <CircuitBoard className="w-5 h-5 text-pcb-primary-light" />
+            <img src="/logo.svg" alt="BuildPCBs Logo" className="w-5 h-5" />
           </div>
           <div className="flex flex-col">
             <span className="text-base font-bold tracking-tight text-white leading-none font-mono">

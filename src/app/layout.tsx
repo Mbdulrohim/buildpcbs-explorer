@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, DM_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 
-const inter = Inter({
-  variable: "--font-inter",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const dmMono = DM_Mono({
+  variable: "--font-dm-mono",
   subsets: ["latin"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -28,46 +29,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased min-h-screen bg-pcb-dark font-sans flex flex-col relative overflow-x-hidden`}
+        className={`${dmSans.variable} ${dmMono.variable} antialiased min-h-screen bg-pcb-dark font-sans flex flex-col relative overflow-x-hidden`}
       >
-        {/* Tech Background */}
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <div className="absolute inset-0 bg-tech-grid bg-[length:40px_40px] opacity-20"></div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-pcb-dark opacity-90"></div>
-        </div>
+        {/* Background Circles - REMOVED, now in Hero.tsx */}
+        {/* <div className="fixed inset-0 z-0 pointer-events-none">
+          <div className="absolute w-[1200px] h-[1200px] top-[300px] left-[-250px] rounded-full z-[-1] bg-[linear-gradient(181.98deg,_rgba(45,45,45,0.12)_1.67%,_rgba(23,23,23,0.02)_14.01%,_rgba(0,0,0,0.02)_68.93%)] dark:bg-[linear-gradient(181.98deg,_#2D2D2D_1.67%,_#171717_14.01%,_#000000_68.93%)]"></div>
+          <div className="absolute w-[900px] h-[900px] top-[450px] left-[-100px] rounded-full z-[-1] bg-[linear-gradient(167.43deg,_rgba(45,45,45,0.06)_9.12%,_rgba(18,18,18,0.02)_36.53%,_rgba(0,0,0,0.01)_62.27%,_rgba(0,0,0,0.01)_84.55%)] dark:bg-[linear-gradient(167.43deg,_#2D2D2D_9.12%,_rgba(18,18,18,0.44)_36.53%,_rgba(0,0,0,0.01)_62.27%,_rgba(0,0,0,0.01)_84.55%)]"></div>
+        </div> */}
 
         <div className="relative z-10 flex flex-col min-h-screen">
-          <Navbar />
-
-          <main className="flex-grow">{children}</main>
-
-          <footer className="border-t border-pcb-border py-8 bg-pcb-panel/50 backdrop-blur-sm mt-20">
-            <div className="container mx-auto px-4 text-center">
-              <p className="text-zinc-600 text-xs font-mono tracking-wider">
-                BUILD_PCBS_NETWORK_V1.0 // SECURED_BY_SILICON_SEAL
-              </p>
-              <div className="flex justify-center gap-6 mt-4 text-xs text-zinc-500 font-mono">
-                <a
-                  href="#"
-                  className="hover:text-pcb-primary-light transition-colors"
-                >
-                  [PRIVACY]
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-pcb-primary-light transition-colors"
-                >
-                  [TERMS]
-                </a>
-                <a
-                  href="#"
-                  className="hover:text-pcb-primary-light transition-colors"
-                >
-                  [CONTRACTS]
-                </a>
-              </div>
-            </div>
-          </footer>
+          {children}
         </div>
       </body>
     </html>
