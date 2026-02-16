@@ -5,7 +5,11 @@ import { MOCK_PROJECTS, CATEGORIES } from "../constants";
 import ProjectCard from "./ProjectCard";
 import { Filter, SlidersHorizontal, Cpu } from "lucide-react";
 
-const Explorer: React.FC = () => {
+interface ExplorerProps {
+  showHero?: boolean;
+}
+
+const Explorer: React.FC<ExplorerProps> = ({ showHero = true }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredProjects =
@@ -16,31 +20,33 @@ const Explorer: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
       {/* Hero Section */}
-      <div className="mb-16 border-b border-pcb-border pb-12 relative">
-        <div className="absolute top-0 right-0 text-pcb-primary/10">
-          <Cpu className="w-64 h-64 opacity-20" />
-        </div>
-
-        <div className="space-y-6 max-w-3xl relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-pcb-primary/10 border border-pcb-primary/20 text-pcb-primary-light text-xs font-mono uppercase tracking-wider mb-2 rounded-sm">
-            <span className="w-2 h-2 bg-pcb-primary rounded-full animate-pulse"></span>
-            System Operational
+      {showHero && (
+        <div className="mb-16 border-b border-pcb-border pb-12 relative">
+          <div className="absolute top-0 right-0 text-pcb-primary/10">
+            <Cpu className="w-64 h-64 opacity-20" />
           </div>
 
-          <h1 className="text-6xl md:text-7xl font-bold text-white tracking-tighter leading-none">
-            HARDWARE <br />
-            <span className="text-zinc-700">AS CODE.</span>
-          </h1>
+          <div className="space-y-6 max-w-3xl relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-pcb-primary/10 border border-pcb-primary/20 text-pcb-primary-light text-xs font-mono uppercase tracking-wider mb-2 rounded-sm">
+              <span className="w-2 h-2 bg-pcb-primary rounded-full animate-pulse"></span>
+              System Operational
+            </div>
 
-          <p className="text-lg text-zinc-400 max-w-xl font-light border-l-2 border-pcb-primary pl-6 py-1">
-            The decentralized manufacturing network. <br />
-            Design, Fork, and Mint physical hardware with AI.
-          </p>
+            <h1 className="text-6xl md:text-7xl font-bold text-white tracking-tighter leading-none">
+              HARDWARE <br />
+              <span className="text-zinc-700">AS CODE.</span>
+            </h1>
+
+            <p className="text-lg text-zinc-400 max-w-xl font-light border-l-2 border-pcb-primary pl-6 py-1">
+              The decentralized manufacturing network. <br />
+              Design, Fork, and Mint physical hardware with AI.
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Controls Bar */}
-      <div className="sticky top-16 z-40 bg-pcb-dark/95 backdrop-blur border-y border-pcb-border py-4 mb-8 -mx-4 px-4 md:px-0">
+      <div className={`sticky ${showHero ? 'top-16' : 'top-[64px]'} z-40 py-4 mb-8 -mx-4 px-4 md:px-0`}>
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Category Tabs */}
           <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto no-scrollbar mask-gradient">
@@ -48,11 +54,10 @@ const Explorer: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all border ${
-                  selectedCategory === cat
-                    ? "bg-pcb-primary text-white border-pcb-primary font-bold"
-                    : "bg-transparent text-zinc-500 border-transparent hover:border-zinc-800 hover:text-zinc-300"
-                }`}
+                className={`px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all border ${selectedCategory === cat
+                  ? "bg-pcb-primary text-white border-pcb-primary font-bold"
+                  : "bg-transparent text-zinc-500 border-transparent hover:border-zinc-800 hover:text-zinc-300"
+                  }`}
               >
                 {cat}
               </button>
@@ -65,7 +70,7 @@ const Explorer: React.FC = () => {
               <Filter className="w-3 h-3" />
               <span>{filteredProjects.length} MODULES</span>
             </div>
-            <div className="hidden md:flex items-center gap-2 border-l border-zinc-800 pl-6">
+            <div className="hidden md:flex items-center gap-2">
               <SlidersHorizontal className="w-3 h-3" />
               <span>SORT: RELEVANCE</span>
             </div>

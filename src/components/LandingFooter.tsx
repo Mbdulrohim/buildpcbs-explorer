@@ -1,68 +1,271 @@
+import React from "react";
+import CTA from "./CTA";
+import Link from "next/link";
+import Image from "next/image";
 
-import React from 'react';
-
-const LandingFooter: React.FC = () => {
+const LandingFooter = () => {
   return (
-    <footer className="bg-black border-t border-zinc-900 py-16 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-12">
-        <div className="col-span-2">
-          <div className="flex items-center space-x-2 mb-6">
-            <div className="relative w-8 h-8 flex items-center justify-center bg-pcb-primary/10 rounded border border-pcb-primary/20 transition-all">
-              <img src="/logo.svg" alt="BuildPCBs Logo" className="w-5 h-5" />
+    <footer className="my-12 w-full">
+      {/* Blue container */}
+      <div className="bg-[#0038DF] w-full md:max-w-6xl md:mx-auto md:rounded-[44px] p-8">
+        <CTA />
+
+        {/* Mobile-only links */}
+        <div className="md:hidden text-white">
+          <div className="pt-12 space-y-16">
+            {/* Logo/Tagline Section */}
+            <div>
+              <Link href="/" className="flex items-center gap-2">
+                <Image src="/logo.svg" alt="buildpcbs logo" width={24} height={20} />
+                <span className="font-medium text-[17px] leading-none tracking-[-0.04em]">
+                  buildpcbs
+                </span>
+              </Link>
+              <p className="mt-4 text-base font-normal leading-[150%] w-[268px]">
+                The AI + Web3 Hardware Network. Think it. Chat it. Build it.
+              </p>
             </div>
-            <span className="font-bold text-xl">BuildPCBs</span>
+
+            {/* 2x2 Grid Section */}
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <h3 className="font-medium text-lg text-black">Features</h3>
+                <ul className="mt-4 space-y-2">
+                  <li>
+                    <a href="" className="text-base font-normal hover:opacity-80">
+                      Integrations
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/pricing"
+                      className="text-base font-normal hover:opacity-80"
+                    >
+                      Pricing
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" className="text-base font-normal hover:opacity-80">
+                      Demo
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-medium text-lg text-black">About Us</h3>
+                <ul className="mt-4 space-y-2">
+                  <li>
+                    <a
+                      href="/blog"
+                      className="text-base font-normal hover:opacity-80"
+                    >
+                      Blog
+                    </a>
+                  </li>
+                  <li>
+                    <a href="" className="text-base font-normal hover:opacity-80">
+                      Careers
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-medium text-lg text-black">Support</h3>
+                <ul className="mt-4 space-y-2">
+                  <li>
+                    <a href="/faq" className="text-base font-normal hover:opacity-80">
+                      FAQ
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/help-center"
+                      className="text-base font-normal hover:opacity-80"
+                    >
+                      Help Center
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="mailto:contact@buildpcbs.com"
+                      className="text-base font-normal hover:opacity-80"
+                    >
+                      Contact
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-medium text-lg text-black">Follow Us</h3>
+                <div className="flex items-center space-x-4 mt-4">
+                  <a
+                    href=""
+                    aria-label="X (formerly Twitter)"
+                    className="hover:opacity-80"
+                  >
+                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                  </a>
+                  <a href="" aria-label="LinkedIn" className="hover:opacity-80">
+                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                  </a>
+                  <a href="" aria-label="Instagram" className="hover:opacity-80">
+                    <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-zinc-500 max-w-xs mb-8">
-            Revolutionizing the hardware life cycle through cloud-native EDA, integrated version control, and global collaboration.
-          </p>
-          <div className="flex space-x-4">
-            <a href="#" className="w-8 h-8 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-zinc-800 transition-colors">
-              <span className="sr-only">Twitter</span>
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" /></svg>
-            </a>
-            <a href="#" className="w-8 h-8 bg-zinc-900 rounded-full flex items-center justify-center hover:bg-zinc-800 transition-colors">
-              <span className="sr-only">GitHub</span>
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" /></svg>
-            </a>
+        </div></div>
+
+      {/* Desktop-only links */}
+      <div className="hidden md:block text-gray-800 dark:text-gray-200 w-full max-w-7xl md:mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="grid grid-cols-6 gap-8 pt-12">
+          <div className="col-span-2">
+            <Link href="/" className="flex items-center gap-2">
+              <Image src="/logo.svg" alt="buildpcbs logo" width={24} height={20} />
+              <span className="font-medium text-[17px] leading-none tracking-[-0.04em]">
+                buildpcbs
+              </span>
+            </Link>
+            <p className="mt-4 text-base font-normal leading-[150%] w-[268px]">
+              The AI + Web3 Hardware Network. Think it. Chat it. Build it.
+            </p>
           </div>
-        </div>
-        <div>
-          <h5 className="font-bold mb-4">Product</h5>
-          <ul className="space-y-2 text-zinc-500 text-sm">
-            <li><a href="#" className="hover:text-blue-500 transition-colors">PCB Editor</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Version Control</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Verification</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Manufacturing</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="font-bold mb-4">Resources</h5>
-          <ul className="space-y-2 text-zinc-500 text-sm">
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Documentation</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Tutorials</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Community</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Open Source</a></li>
-          </ul>
-        </div>
-        <div>
-          <h5 className="font-bold mb-4">Company</h5>
-          <ul className="space-y-2 text-zinc-500 text-sm">
-            <li><a href="#" className="hover:text-blue-500 transition-colors">About Us</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Careers</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Blog</a></li>
-            <li><a href="#" className="hover:text-blue-500 transition-colors">Contact</a></li>
-          </ul>
+          <div>
+            <h3 className="font-medium text-lg">Features</h3>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <a href="" className="text-base font-normal hover:opacity-80">
+                  Integrations
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/pricing"
+                  className="text-base font-normal hover:opacity-80"
+                >
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="" className="text-base font-normal hover:opacity-80">
+                  Demo
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-medium text-lg">About Us</h3>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <a href="/blog" className="text-base font-normal hover:opacity-80">
+                  Blog
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/career"
+                  className="text-base font-normal hover:opacity-80"
+                >
+                  Careers
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-medium text-lg">Support</h3>
+            <ul className="mt-4 space-y-2">
+              <li>
+                <a href="/faq" className="text-base font-normal hover:opacity-80">
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/help-center"
+                  className="text-base font-normal hover:opacity-80"
+                >
+                  Help Center
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:contact@buildpcbs.com"
+                  className="text-base font-normal hover:opacity-80"
+                >
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-medium text-lg">Follow Us</h3>
+            <div className="flex items-center space-x-4 mt-4">
+              <a
+                href="https://x.com/buildpcbswithAI"
+                aria-label="X (formerly Twitter)"
+                className="hover:opacity-80"
+              >
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/buildpbcs/"
+                aria-label="LinkedIn"
+                className="hover:opacity-80"
+              >
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+              <a
+                href="https://www.instagram.com/buildpcb?igsh=MWNjdmR0ODl2a2pxdA=="
+                aria-label="Instagram"
+                className="hover:opacity-80"
+              >
+                <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.644-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-zinc-900 flex flex-col md:flex-row justify-between items-center text-xs text-zinc-600">
-        <p>&copy; 2026 BuildPCBs Technologies Inc. All rights reserved.</p>
-        <div className="flex space-x-6 mt-4 md:mt-0">
-          <a href="#" className="hover:text-zinc-400">Privacy Policy</a>
-          <a href="#" className="hover:text-zinc-400">Terms of Service</a>
-          <a href="#" className="hover:text-zinc-400">Cookie Policy</a>
+
+      {/* Giant Text */}
+      <div className="w-full md:w-[1105px] md:mx-auto text-center pt-4 pb-0 md:py-4">
+        <h4 className="text-[85px] md:text-[240px] font-extrabold tracking-[-0.04em] text-[#0038DF] leading-none">
+          buildpcbs
+        </h4>
+      </div>
+
+      {/* Copyright section (visible on all sizes) */}
+      <div className="w-full md:w-[1105px] md:mx-auto text-[#777777] px-4 sm:px-6 lg:px-8">
+        <div className="w-full mt-8 md:mt-12 pt-8 text-center text-sm">
+          <div className="flex flex-col md:flex-row md:justify-between items-center gap-4">
+            <p>&copy; 2025 buildpcbs. All rights reserved.</p>
+            <div className="flex items-center space-x-6">
+              <a href="/terms" className="hover:opacity-80">
+                Terms of Service
+              </a>
+              <a href="/privacy" className="hover:opacity-80">
+                Privacy Policy
+              </a>
+              <a href="" className="hover:opacity-80">
+                Cookie Policy
+              </a>
+            </div>
+          </div>
         </div>
       </div>
-    </footer>
+    </footer >
   );
 };
 
