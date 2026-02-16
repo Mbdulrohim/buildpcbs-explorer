@@ -13,13 +13,13 @@ const CTA = () => {
                 className="font-normal text-[17px] leading-[150%] tracking-[-0.005em] mt-6 w-[341px] max-w-full z-10"
                 style={{ color: "#9FADFF" }}
             >
-                The first AI copilot for circuit boards is here.
+                The open marketplace for circuit boards is here.
             </p>
             <a
                 href="https://app.buildpcbs.com"
                 className="flex items-center justify-center w-[171px] h-[50px] md:w-[203px] rounded-full bg-white mt-8 text-[#777777] font-medium text-base hover:opacity-90 transition-opacity z-10"
             >
-                Start Now
+                Explore Now
             </a>
         </section>
     );

@@ -38,9 +38,9 @@ const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) => {
         currentIdx++;
         if (currentIdx === fullText.length) {
           clearInterval(typeInterval);
-          setTimeout(() => setPhase('DISSOLVE'), 1000);
+          setTimeout(() => setPhase('DISSOLVE'), 2500);
         }
-      }, 95);
+      }, 120);
       return () => clearInterval(typeInterval);
     }
   }, [phase]);
