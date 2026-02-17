@@ -2,10 +2,13 @@ import { GoogleGenAI } from "@google/genai";
 import { Project } from "../types";
 
 // Initialize Gemini Client
-const apiKey = process.env.API_KEY || '';
+const apiKey = process.env.API_KEY || "";
 const ai = new GoogleGenAI({ apiKey });
 
-export const askAiAboutProject = async (project: Project, question: string): Promise<string> => {
+export const askAiAboutProject = async (
+  project: Project,
+  question: string,
+): Promise<string> => {
   if (!apiKey) {
     return "API Key is missing. Please configure the environment.";
   }
@@ -17,16 +20,16 @@ export const askAiAboutProject = async (project: Project, question: string): Pro
       specs: project.specs,
       bom: project.bom,
       isVerified: project.siliconSeal,
-      author: project.author.username
+      author: project.author.username,
     });
 
     const systemPrompt = `
       You are an expert Hardware Engineer AI for BuildPCBs.
       You are analyzing a specific hardware project manifest.
-      
+
       Project Context:
       ${projectContext}
-      
+
       Your goal is to answer technical questions about this specific design.
       If the user asks about compatibility, voltage, or components, use the BOM and Specs provided.
       Keep answers concise, technical but accessible.
@@ -34,11 +37,11 @@ export const askAiAboutProject = async (project: Project, question: string): Pro
     `;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: "gemini-3-pro-preview",
       contents: question,
       config: {
         systemInstruction: systemPrompt,
-      }
+      },
     });
 
     return response.text || "I couldn't generate a response at this time.";
@@ -53,7 +56,7 @@ export const generateSummary = async (project: Project): Promise<string> => {
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-3-flash-preview',
+      model: "gemini-3-pro-preview",
       contents: `Summarize this hardware project in one punchy sentence for a marketplace listing: ${project.title} - ${project.description}`,
     });
     return response.text || project.description;

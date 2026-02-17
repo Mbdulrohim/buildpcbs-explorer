@@ -10,16 +10,13 @@ interface ProjectCardProps {
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <Link
-      href={`/project/${project.id}`}
+      href={`/p/${project.id}`}
       className="group relative bg-pcb-panel border border-pcb-border overflow-hidden hover:border-pcb-primary/40 transition-all duration-300 flex flex-col h-full hover:shadow-[0_0_30px_-10px_rgba(0,56,223,0.15)]"
     >
       {/* Header Status Bar */}
       <div className="flex items-center justify-between px-3 py-2 border-b border-pcb-border bg-black/40 text-[10px] font-mono uppercase text-zinc-500">
         <span className="group-hover:text-pcb-primary-light transition-colors">
-          ID: {project.id.padStart(4, "0")}
-        </span>
-        <span className="bg-yellow-500/20 text-yellow-500 px-1.5 py-0.5 rounded text-[10px] font-bold border border-yellow-500/30">
-          PROP_DATA
+          ID: {project.id}
         </span>
         <span
           className={

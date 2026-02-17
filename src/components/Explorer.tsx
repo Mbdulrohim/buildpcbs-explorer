@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { MOCK_PROJECTS, CATEGORIES } from "../constants";
+import { CATEGORIES } from "../constants";
+import { getProjects } from "../services/api";
+import { Project } from "../types";
 import ProjectCard from "./ProjectCard";
 import { Filter, SlidersHorizontal, Cpu } from "lucide-react";
 
@@ -11,11 +13,27 @@ interface ExplorerProps {
 
 const Explorer: React.FC<ExplorerProps> = ({ showHero = true }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  React.useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await getProjects({ limit: 50 });
+        setProjects(data);
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
 
   const filteredProjects =
     selectedCategory === "All"
-      ? MOCK_PROJECTS
-      : MOCK_PROJECTS.filter((p) => p.tags.includes(selectedCategory));
+      ? projects
+      : projects.filter((p) => p.tags.includes(selectedCategory));
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-7xl">
@@ -46,7 +64,9 @@ const Explorer: React.FC<ExplorerProps> = ({ showHero = true }) => {
       )}
 
       {/* Controls Bar */}
-      <div className={`sticky ${showHero ? 'top-16' : 'top-[64px]'} z-40 py-4 mb-8 -mx-4 px-4 md:px-0`}>
+      <div
+        className={`sticky ${showHero ? "top-16" : "top-[64px]"} z-40 py-4 mb-8 -mx-4 px-4 md:px-0`}
+      >
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Category Tabs */}
           <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto no-scrollbar mask-gradient">
@@ -54,10 +74,11 @@ const Explorer: React.FC<ExplorerProps> = ({ showHero = true }) => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all border ${selectedCategory === cat
-                  ? "bg-pcb-primary text-white border-pcb-primary font-bold"
-                  : "bg-transparent text-zinc-500 border-transparent hover:border-zinc-800 hover:text-zinc-300"
-                  }`}
+                className={`px-4 py-2 text-xs font-mono uppercase tracking-wider transition-all border ${
+                  selectedCategory === cat
+                    ? "bg-pcb-primary text-white border-pcb-primary font-bold"
+                    : "bg-transparent text-zinc-500 border-transparent hover:border-zinc-800 hover:text-zinc-300"
+                }`}
               >
                 {cat}
               </button>
@@ -79,13 +100,24 @@ const Explorer: React.FC<ExplorerProps> = ({ showHero = true }) => {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {filteredProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="h-[300px] bg-zinc-900/50 animate-pulse rounded-xl border border-zinc-800"
+            ></div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      )}
 
-      {filteredProjects.length === 0 && (
+      {!isLoading && filteredProjects.length === 0 && (
         <div className="flex flex-col items-center justify-center py-32 border border-dashed border-zinc-800 bg-zinc-900/20">
           <Cpu className="w-12 h-12 text-zinc-700 mb-4" />
           <p className="text-zinc-500 font-mono">NO_MODULES_FOUND</p>
